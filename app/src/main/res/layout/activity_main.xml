@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Синяя анимированная кнопка -->
+    <com.example.task3.AnimatedButtonView
+        android:id="@+id/animatedButton"
+        android:layout_width="300dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Первая красная кнопка -->
+    <Button
+        android:id="@+id/redButton1"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        android:text="1"
+        app:layout_constraintBottom_toTopOf="@id/animatedButton"
+        app:layout_constraintEnd_toEndOf="@id/animatedButton"
+        app:layout_constraintStart_toStartOf="@id/animatedButton" />
+
+    <!-- Вторая красная кнопка -->
+    <Button
+        android:id="@+id/redButton2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        android:text="2"
+        app:layout_constraintBottom_toTopOf="@id/redButton1"
+        app:layout_constraintEnd_toEndOf="@id/redButton1"
+        app:layout_constraintStart_toStartOf="@id/redButton1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
