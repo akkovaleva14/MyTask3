@@ -22,7 +22,11 @@ class MainActivity : AppCompatActivity() {
                     redButton2.visibility = View.GONE
                 }
             } else {
-                // Убедимся, что кнопки видимы перед началом анимации
+                // Подготовка: убедимся, что кнопки видимы
+                redButton1.translationY = animatedButton.height.toFloat()
+                redButton2.translationY = animatedButton.height.toFloat()
+                redButton1.alpha = 0f
+                redButton2.alpha = 0f
                 redButton1.visibility = View.VISIBLE
                 redButton2.visibility = View.VISIBLE
 
@@ -38,20 +42,19 @@ class MainActivity : AppCompatActivity() {
         hide: Boolean,
         onEnd: (() -> Unit)?
     ) {
-        val translationY1 = if (hide) 200f else 0f // Сместить вверх или вниз
-        val translationY2 = if (hide) 250f else 0f
+        val buttonHeight = button1.height.toFloat()
+        val targetTranslationY1 = if (hide) buttonHeight else 0f
+        val targetTranslationY2 = if (hide) buttonHeight + 50f else 50f
 
         button1.animate()
-            .translationY(translationY1)
+            .translationY(targetTranslationY1)
             .alpha(if (hide) 0f else 1f)
             .setDuration(300)
-            .withEndAction {
-                onEnd?.invoke()
-            }
+            .withEndAction { onEnd?.invoke() }
             .start()
 
         button2.animate()
-            .translationY(translationY2)
+            .translationY(targetTranslationY2)
             .alpha(if (hide) 0f else 1f)
             .setDuration(300)
             .start()

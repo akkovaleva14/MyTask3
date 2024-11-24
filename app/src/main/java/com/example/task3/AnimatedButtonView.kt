@@ -37,8 +37,6 @@ class AnimatedButtonView @JvmOverloads constructor(
     }
 
     private val rect = RectF()
-
-    //    private var cornerRadius = 50f
     private var cornerRadius = 0f
     private var textAlpha = 255
     private var currentWidth = 0f
