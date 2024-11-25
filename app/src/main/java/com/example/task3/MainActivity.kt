@@ -21,10 +21,7 @@ class MainActivity : AppCompatActivity() {
         animatedButton.onButtonClick = { isExpanded ->
             if (isExpanded) {
                 // Анимация исчезновения
-                animateRedButtons(redButton1, redButton2, hide = true) {
-                    redButton1.visibility = View.GONE
-                    redButton2.visibility = View.GONE
-                }
+                animateRedButtons(redButton1, redButton2, hide = true)
             } else {
                 // Подготовка: убедимся, что кнопки видимы
                 redButton1.translationY = animatedButton.height.toFloat()
@@ -35,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 redButton2.visibility = View.VISIBLE
 
                 // Анимация появления
-                animateRedButtons(redButton1, redButton2, hide = false, onEnd = null)
+                animateRedButtons(redButton1, redButton2, hide = false)
             }
         }
     }
@@ -43,14 +40,12 @@ class MainActivity : AppCompatActivity() {
     private fun animateRedButtons(
         button1: View,
         button2: View,
-        hide: Boolean,
-        onEnd: (() -> Unit)?
+        hide: Boolean
     ) {
         button1.animate()
             .translationY(if (hide) button1.height.toFloat() else 0f)
             .alpha(if (hide) 0f else 1f)
             .setDuration(300)
-            .withEndAction { onEnd?.invoke() }
             .start()
 
         button2.animate()
