@@ -36,10 +36,20 @@ class AnimatedButtonView @JvmOverloads constructor(
     private var textAlpha = 255
     private var currentWidth = 0f
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        currentWidth = w.toFloat()
-        cornerRadius = h / 2f // Устанавливаем радиус закругления как половину высоты
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        val desiredWidth = 300
+        val desiredHeight = 120
+
+        val width = resolveSize(desiredWidth, widthMeasureSpec)
+        val height = resolveSize(desiredHeight, heightMeasureSpec)
+
+        setMeasuredDimension(width, height)
+
+        // Устанавливаем начальные параметры кнопки
+        currentWidth = width.toFloat()
+        cornerRadius = height / 2f // Радиус закругления — половина высоты
     }
 
     @SuppressLint("DrawAllocation")
@@ -64,7 +74,6 @@ class AnimatedButtonView @JvmOverloads constructor(
             height / 2f - (textPaint.descent() + textPaint.ascent()) / 2,
             textPaint
         )
-
     }
 
     private fun toggleState() {
