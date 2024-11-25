@@ -19,15 +19,10 @@ class AnimatedButtonView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     private var isExpanded = true
-    private var areRedButtonsVisible = false
     var onButtonClick: ((Boolean) -> Unit)? = null
 
     private val rectPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = ContextCompat.getColor(context, android.R.color.holo_blue_light)
-    }
-
-    private val redButtonPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = ContextCompat.getColor(context, android.R.color.holo_red_light)
     }
 
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -40,7 +35,6 @@ class AnimatedButtonView @JvmOverloads constructor(
     private var cornerRadius = 0f
     private var textAlpha = 255
     private var currentWidth = 0f
-    private var redButtonOffset = 0f // Смещение красных кнопок
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -71,29 +65,6 @@ class AnimatedButtonView @JvmOverloads constructor(
             textPaint
         )
 
-        // Рисуем красные кнопки, если они видимы
-        if (areRedButtonsVisible) {
-            val redButtonWidth = 100f
-            val redButtonHeight = 50f
-
-            // Первая красная кнопка
-            canvas.drawRect(
-                (width / 2f - redButtonWidth / 2) + redButtonOffset,
-                (height + 10).toFloat(),
-                (width / 2f + redButtonWidth / 2) + redButtonOffset,
-                height + 10 + redButtonHeight,
-                redButtonPaint
-            )
-
-            // Вторая красная кнопка
-            canvas.drawRect(
-                (width / 2f - redButtonWidth / 2) + redButtonOffset,
-                (height + 70).toFloat(),
-                (width / 2f + redButtonWidth / 2) + redButtonOffset,
-                height + 70 + redButtonHeight,
-                redButtonPaint
-            )
-        }
     }
 
     private fun toggleState() {
@@ -138,10 +109,8 @@ class AnimatedButtonView @JvmOverloads constructor(
         cornerAnimator.start()
         alphaAnimator.start()
 
-        // Сообщаем, что нужно переключить красные кнопки
         onButtonClick?.invoke(isExpanded)
     }
-
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
