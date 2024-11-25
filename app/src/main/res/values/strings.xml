@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Task3</string>
+    <string name="expanded_button_text">Button</string>
+    <string name="collapsed_button_text">X</string>
 </resources>

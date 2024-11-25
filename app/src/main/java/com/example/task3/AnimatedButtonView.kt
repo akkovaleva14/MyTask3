@@ -1,5 +1,6 @@
 package com.example.task3
 
+import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
@@ -50,7 +51,10 @@ class AnimatedButtonView @JvmOverloads constructor(
 
         // Рисуем текст
         canvas.drawText(
-            if (isExpanded) "Button" else "X",
+            if (isExpanded)
+                context.getString(R.string.expanded_button_text)
+            else
+                context.getString(R.string.collapsed_button_text),
             width / 2f,
             height / 2f - (textPaint.descent() + textPaint.ascent()) / 2,
             textPaint
@@ -64,32 +68,45 @@ class AnimatedButtonView @JvmOverloads constructor(
     }
 
     private fun animateButton() {
-        ValueAnimator.ofFloat(currentWidth, if (isExpanded) width.toFloat() else height.toFloat())
+        AnimatorSet()
             .apply {
-                duration = 300
-                addUpdateListener {
-                    currentWidth = it.animatedValue as Float
-                    invalidate()
-                }
-                start()
-            }
-
-        ValueAnimator.ofFloat(cornerRadius, if (isExpanded) height / 2f else height / 2f)
-            .apply {
-                duration = 300
-                addUpdateListener {
-                    cornerRadius = it.animatedValue as Float
-                    invalidate()
-                }
+                playTogether(
+                    ValueAnimator.ofFloat(
+                        currentWidth,
+                        if (isExpanded) width.toFloat() else height.toFloat()
+                    )
+                        .apply {
+                            duration = 300
+                            addUpdateListener {
+                                currentWidth = it.animatedValue as Float
+                                invalidate()
+                            }
+                        },
+                    ValueAnimator.ofFloat(
+                        cornerRadius,
+                        if (isExpanded) height / 2f else height / 2f
+                    )
+                        .apply {
+                            duration = 300
+                            addUpdateListener {
+                                cornerRadius = it.animatedValue as Float
+                                invalidate()
+                            }
+                        }
+                )
                 start()
             }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_DOWN) {
+        // Проверяем, попадает ли нажатие в видимую область кнопки
+        if (event.action == MotionEvent.ACTION_DOWN &&
+            event.x in (width - currentWidth) / 2..(width + currentWidth) / 2 &&
+            event.y in 0f..height.toFloat()
+        ) {
             toggleState()
             return true
         }
-        return super.onTouchEvent(event)
+        return false
     }
 }
