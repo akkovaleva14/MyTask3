@@ -46,19 +46,15 @@ class MainActivity : AppCompatActivity() {
         hide: Boolean,
         onEnd: (() -> Unit)?
     ) {
-        val buttonHeight = button1.height.toFloat()
-        val targetTranslationY1 = if (hide) buttonHeight else 0f
-        val targetTranslationY2 = if (hide) buttonHeight + 50f else 50f
-
         button1.animate()
-            .translationY(targetTranslationY1)
+            .translationY(if (hide) button1.height.toFloat() else 0f)
             .alpha(if (hide) 0f else 1f)
             .setDuration(300)
             .withEndAction { onEnd?.invoke() }
             .start()
 
         button2.animate()
-            .translationY(targetTranslationY2)
+            .translationY(if (hide) button1.height.toFloat() + 50f else 50f)
             .alpha(if (hide) 0f else 1f)
             .setDuration(300)
             .start()
