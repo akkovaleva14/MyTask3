@@ -16,30 +16,18 @@
 
     <TextView
         android:id="@+id/redButton1"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
+        style="@style/RedButtonStyle"
         android:layout_marginBottom="1dp"
-        android:background="@drawable/circular_button"
-        android:gravity="center"
-        android:text="1"
-        android:textColor="@android:color/white"
-        android:visibility="gone"
+        android:text="@string/_1"
         app:layout_constraintBottom_toTopOf="@id/animatedButton"
         app:layout_constraintEnd_toEndOf="@id/animatedButton"
         app:layout_constraintStart_toStartOf="@id/animatedButton" />
 
     <TextView
         android:id="@+id/redButton2"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
+        style="@style/RedButtonStyle"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/circular_button"
-        android:gravity="center"
-        android:text="2"
-        android:textColor="@android:color/white"
-        android:visibility="gone"
+        android:text="@string/_2"
         app:layout_constraintBottom_toTopOf="@id/redButton1"
         app:layout_constraintEnd_toEndOf="@id/redButton1"
         app:layout_constraintStart_toStartOf="@id/redButton1" />

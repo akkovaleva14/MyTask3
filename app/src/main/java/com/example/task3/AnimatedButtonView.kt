@@ -74,25 +74,23 @@ class AnimatedButtonView @JvmOverloads constructor(
                     ValueAnimator.ofFloat(
                         currentWidth,
                         if (isExpanded) width.toFloat() else height.toFloat()
-                    )
-                        .apply {
-                            duration = 300
-                            addUpdateListener {
-                                currentWidth = it.animatedValue as Float
-                                invalidate()
-                            }
-                        },
+                    ).apply {
+                        duration = 300
+                        addUpdateListener {
+                            currentWidth = it.animatedValue as Float
+                            invalidate()
+                        }
+                    },
                     ValueAnimator.ofFloat(
                         cornerRadius,
                         if (isExpanded) height / 2f else height / 2f
-                    )
-                        .apply {
-                            duration = 300
-                            addUpdateListener {
-                                cornerRadius = it.animatedValue as Float
-                                invalidate()
-                            }
+                    ).apply {
+                        duration = 300
+                        addUpdateListener {
+                            cornerRadius = it.animatedValue as Float
+                            invalidate()
                         }
+                    }
                 )
                 start()
             }
