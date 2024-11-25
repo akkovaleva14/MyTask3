@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -27,7 +26,6 @@ class AnimatedButtonView @JvmOverloads constructor(
         textSize = 50f
         textAlign = Paint.Align.CENTER
     }
-
     private var isExpanded: Boolean = true
     private var cornerRadius = 0f
     private var currentWidth = 0f
