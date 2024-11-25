@@ -3,16 +3,20 @@ package com.example.task3
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.task3.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val animatedButton: AnimatedButtonView = findViewById(R.id.animatedButton)
-        val redButton1: View = findViewById(R.id.redButton1)
-        val redButton2: View = findViewById(R.id.redButton2)
+        val animatedButton = binding.animatedButton
+        val redButton1 = binding.redButton1
+        val redButton2 = binding.redButton2
 
         animatedButton.onButtonClick = { isExpanded ->
             if (isExpanded) {
